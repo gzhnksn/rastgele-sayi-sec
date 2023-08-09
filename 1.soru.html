@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+   
+    .red{
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+</head>
+
+<body>
+    
+   
+    <div class="sayitablosu">
+
+        <p> 1'den 99'a kadar olan sayılar for döngüsü ile yan yana  <button id="siralaButton" onclick="sirala()">Sırala</button></p>
+        
+         <button id="rastgeleButton" onclick="rastgeleSayiSec()" disabled>Rastgele Sayı Seç</button>
+    </div>
+    <div class="sayilar" id="sayilarGrubu"></div>
+
+   <script>
+
+    const siralaButton = document.getElementById('siralaButton');
+    const rastgeleButton = document.getElementById('rastgeleButton');
+    const sayilarGrubu=document.getElementById('sayilarGrubu');
+    const spans = [];
+    let seciliSayilar=[];
+
+    function sirala(){
+        siralaButton.disabled=true;
+        rastgeleButton.disabled=false;
+        sayilarGrubu.innerHTML='';
+
+        let sira ='';
+        for(let i=1; i<=99; i++){
+            sira +=  '<span class="sayi">' + i +'</span>';
+            if (i % 10 === 0){
+                sayilarGrubu.innerHTML += sira + '<br>';
+                sira = ' ';           
+               }
+               else {
+                sira += ' ';
+            }
+        }
+
+       sayilarGrubu.innerHTML += '<span class="sayi">91</span> <span class="sayi">92</span> <span class="sayi">93</span> <span class="sayi">94</span> <span class="sayi">95</span> <span class="sayi">96</span> <span class="sayi">97</span> <span class="sayi">98</span> <span class="sayi">99</span>';
+        spans.push(...sayilarGrubu.querySelectorAll('.sayi'));
+        
+    }
+
+    function rastgeleSayiSec(){
+        const rastgeleIndex = getRastgeleIndex(spans.length);
+        seciliSayilar.push(rastgeleIndex);
+
+        spans.forEach((span, index)=>{
+            if(seciliSayilar.includes(index)){
+                span.classList.add('red');  
+            }else{
+                span.classList.remove('red');
+            }
+        });
+    }
+       
+    function getRastgeleIndex(max){
+        return Math.floor(Math.random() * max);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   </script>
+
+</body>
+</html>
